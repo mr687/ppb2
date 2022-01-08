@@ -1,13 +1,13 @@
 const Req = require('../models/Req');
 
-const apiKey = '123'
+const apiKey = process.env.API_KEY || ''
 module.exports = {
   async createReq({ body }, res, next) {
     const { name, password, key } = body
     if (key !== apiKey) {
       res.status(401).json({
         status: 'error',
-        message: 'Invalid API key'
+        message: 'invalid api key'
       })
       return
     }
