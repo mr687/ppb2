@@ -18,7 +18,7 @@ module.exports = {
     try {
       const { dump: { schema, data, trigger } } = await dump(`laundry_sql_dump_${Date.now()}`)
       res.set('Content-Type', 'text/plain')
-      res.send([schema, data, trigger].join('\n').replaceAll(' COLLATE = utf8mb4_0900_ai_ci', ''))
+      res.send([schema, data, trigger].join('\n').replace(/\sCOLLATE = utf8mb4_0900_ai_ci/g, ''))
     } catch (err) {
       next(err)
     }
