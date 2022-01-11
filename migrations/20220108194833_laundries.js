@@ -6,10 +6,10 @@ exports.up = function (knex) {
       if (!x) {
         return knex.schema.createTable(tableName, (table) => {
           table.increments('id').primary()
-          table.string('name', 100).nullable()
-          table.string('address', 191).nullable()
-          table.string('phone', 20).nullable()
-          table.string('nim', 20).nullable()
+          table.string('nama', 100).nullable()
+          table.string('alamat', 191).nullable()
+          table.string('nohp', 100).nullable()
+          table.string('kota', 100).nullable()
           table.timestamps(true, true)
         })
       }

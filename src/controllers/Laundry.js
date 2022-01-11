@@ -2,15 +2,15 @@ const req = require('express/lib/request')
 const Laundry = require('../models/Laundry')
 const Req = require('../models/Req')
 const validate = ({ body, res }) => {
-  if (body['name'] && typeof body['name'] === 'string' && body['name'].length > 0 && body['name'].length < 100 &&
-    body['address'] && typeof body['address'] === 'string' && body['address'].length > 0 && body['address'].length < 191 &&
-    body['phone'] && typeof body['phone'] === 'string' && body['phone'].length > 0 && body['phone'].length < 20 &&
-    body['nim'] && typeof body['nim'] === 'string' && body['nim'].length > 0 && body['nim'].length < 20) {
+  if (body['nama'] && typeof body['nama'] === 'string' && body['nama'].length > 0 && body['nama'].length < 100 &&
+    body['alamat'] && typeof body['alamat'] === 'string' && body['alamat'].length > 0 && body['alamat'].length < 191 &&
+    body['nohp'] && typeof body['nohp'] === 'string' && body['nohp'].length > 0 && body['nohp'].length < 20 &&
+    body['kota'] && typeof body['kota'] === 'string' && body['kota'].length > 0 && body['kota'].length < 20) {
     req.validated = {
-      name: body['name'],
-      address: body['address'],
-      phone: body['phone'],
-      nim: body['nim']
+      nama: body['nama'],
+      alamat: body['alamat'],
+      nohp: body['nohp'],
+      kota: body['kota']
     }
     return
   }
@@ -41,7 +41,7 @@ module.exports = {
   },
   async getLaundries(req, res) {
     const laundries = await Laundry.query()
-      .select('id', 'name', 'address', 'phone', 'nim', 'created_at')
+      .select('id', 'nama', 'alamat', 'nohp', 'kota', 'created_at')
     res.json({
       status: 'success',
       message: 'laundries retrieved',
@@ -62,7 +62,7 @@ module.exports = {
     }
   },
   async getLaundry({ params: { laundryId } }, res) {
-    const laundry = await Laundry.query().where('id', laundryId).select('id', 'name', 'address', 'phone', 'nim', 'created_at').first()
+    const laundry = await Laundry.query().where('id', laundryId).select('id', 'nama', 'alamat', 'nohp', 'kota', 'created_at').first()
     if (!laundry) {
       res.status(404).send({
         status: 'error',
